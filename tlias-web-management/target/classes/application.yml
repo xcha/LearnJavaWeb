@@ -12,3 +12,7 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     mapUnderscoreToCamelCase: true
   mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    org .springframework.jdbc.support.JdbcTransactionManager: debug
