@@ -11,5 +11,11 @@
         </foreach>
 
 </insert>
+    <delete id="deleteByEmpIds">
+        DELETE FROM emp_expr WHERE emp_id IN
+        <foreach collection="empIds" item="empId" open="(" close=")" separator=",">
+            #{empId}
+        </foreach>
+    </delete>
 
 </mapper>

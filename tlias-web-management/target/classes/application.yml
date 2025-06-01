@@ -6,6 +6,10 @@ spring:
     username: root
     password: Zdx08080.
     driver-class-name: com.mysql.cj.jdbc.Driver
+  server:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
 
 mybatis:
   configuration:
@@ -16,3 +20,9 @@ mybatis:
 logging:
   level:
     org .springframework.jdbc.support.JdbcTransactionManager: debug
+
+aliyun:
+  oss:
+    endpoint: https://oss-cn-fuzhou.aliyuncs.com
+    bucketName: lianci-java
+    region: cn-fuzhou

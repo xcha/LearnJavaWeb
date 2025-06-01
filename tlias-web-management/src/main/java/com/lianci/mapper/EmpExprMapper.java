@@ -1,11 +1,7 @@
 package com.lianci.mapper;
 
 import com.lianci.pojo.EmpExpr;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,4 +9,6 @@ import java.util.List;
 public interface EmpExprMapper {
 
     void insertBatch(List<EmpExpr> exprList);
+
+    void deleteByEmpIds(List<Integer> empIds);
 }

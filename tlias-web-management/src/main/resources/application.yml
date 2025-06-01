@@ -21,3 +21,8 @@ logging:
   level:
     org .springframework.jdbc.support.JdbcTransactionManager: debug
 
+aliyun:
+  oss:
+    endpoint: https://oss-cn-fuzhou.aliyuncs.com
+    bucketName: lianci-java
+    region: cn-fuzhou
