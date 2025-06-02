@@ -2,10 +2,11 @@ package com.lianci.mapper;
 
 import com.lianci.pojo.Emp;
 import com.lianci.pojo.EmpQueryParam;
+import com.lianci.pojo.JobOption;
 import org.apache.ibatis.annotations.*;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface EmpMapper {
@@ -29,4 +30,10 @@ public interface EmpMapper {
    Emp getById(Integer id);
 
    void updateById(Emp emp);
+
+   @MapKey("pos")
+   List<Map<String,Object>> countEmpJobDate();
+
+   @MapKey("name")
+   List<Map<String,Object>> countEmpGenderData();
 }
