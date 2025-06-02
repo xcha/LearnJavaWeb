@@ -26,16 +26,16 @@ public class EmpServiceImpl implements EmpService {
     @Autowired
     private EmpLogServiceImpl empLogService;
 //    @Override
-//    public PageResult<Emp> page(Integer page, Integer pageSize) {
+//    public PageResult<Emp> list(Integer list, Integer pageSize) {
 //    Long total = empMapper.count();
-//    Integer  start = (page - 1) * pageSize;
+//    Integer  start = (list - 1) * pageSize;
 //    List<Emp> rows = empMapper.list(start, pageSize);
 //
 //    return new PageResult<>(total,rows);
 
 //    @Override
-//    public PageResult<Emp> page(Integer page, Integer pageSize, String name, Integer gender, LocalDate begin, LocalDate end) {
-//        PageHelper.startPage(page,pageSize);
+//    public PageResult<Emp> list(Integer list, Integer pageSize, String name, Integer gender, LocalDate begin, LocalDate end) {
+//        PageHelper.startPage(list,pageSize);
 //        List<Emp> empList = empMapper.list(name, gender, begin, end);
 //        Page<Emp> p= (Page<Emp>) empList;
 //        return new PageResult<Emp>(p.getTotal(), p.getResult());
@@ -76,7 +76,6 @@ public class EmpServiceImpl implements EmpService {
     @Transactional(rollbackFor = Exception.class)
     public void delete(List<Integer> ids) {
         empMapper.deleteByIds(ids);
-
         empExprMapper.deleteByEmpIds(ids);
     }
 
@@ -96,5 +95,10 @@ public class EmpServiceImpl implements EmpService {
             exprList.forEach(empExpr -> empExpr.setEmpId(emp.getId()));
             empExprMapper.insertBatch(exprList);
         }
+    }
+
+    @Override
+    public List<Emp> list() {
+        return empMapper.findAll();
     }
 }

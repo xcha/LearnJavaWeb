@@ -21,13 +21,13 @@ public class EmpController {
     private EmpService empService;
 
 //    @GetMapping
-//    public Result page(@RequestParam(defaultValue = "1")  Integer page, @RequestParam(defaultValue = "10") Integer pageSize,
+//    public Result list(@RequestParam(defaultValue = "1")  Integer list, @RequestParam(defaultValue = "10") Integer pageSize,
 //                       String name,
 //                       Integer gender,
 //                       @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate begin,
 //                       @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate end) {
-//        log.info("分页查询:{},{},{},{},{},{}",  page, pageSize, name, gender, begin, end);
-//        PageResult<Emp> pageResult = empService.page(page, pageSize, name, gender, begin, end);
+//        log.info("分页查询:{},{},{},{},{},{}",  list, pageSize, name, gender, begin, end);
+//        PageResult<Emp> pageResult = empService.list(list, pageSize, name, gender, begin, end);
 //        return Result.success(pageResult);
 //    }
     @GetMapping
@@ -35,6 +35,13 @@ public class EmpController {
         log.info("分页查询:{}", empQueryParam);
         PageResult<Emp> pageResult = empService.page(empQueryParam);
         return Result.success(pageResult);
+    }
+
+    @GetMapping("/list")
+     public Result list() {
+        log.info("查询所有员工");
+        List<Emp> empList = empService.list();
+        return Result.success(empList);
     }
 
     @PostMapping

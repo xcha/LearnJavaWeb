@@ -10,6 +10,8 @@ import java.util.Map;
 
 @Mapper
 public interface EmpMapper {
+
+
 //    @Select("select count(*) from emp e left join dept d on e.dept_id =d.id")
 //    public Long count();
 //
@@ -36,4 +38,7 @@ public interface EmpMapper {
 
    @MapKey("name")
    List<Map<String,Object>> countEmpGenderData();
+
+   @Select("select id, username, password, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time from emp")
+   List<Emp> findAll();
 }
