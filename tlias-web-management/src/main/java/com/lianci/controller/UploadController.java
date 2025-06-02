@@ -29,7 +29,7 @@ public class UploadController{
     public Result upload(MultipartFile file) throws Exception{
         log.info("文件上传：{}", file.getOriginalFilename());
         //  文件上传OSS
-        String  url = aliyunOSSOperator.upload(file.getBytes(), file.getOriginalFilename());
+        String url = aliyunOSSOperator.upload(file.getBytes(), file.getOriginalFilename());
         log.info("文件上传成功：{}", url);
         return Result.success(url);
     }

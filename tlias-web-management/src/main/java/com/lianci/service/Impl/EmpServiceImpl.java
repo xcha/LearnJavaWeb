@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.beans.Transient;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -77,6 +77,24 @@ public class EmpServiceImpl implements EmpService {
     public void delete(List<Integer> ids) {
         empMapper.deleteByIds(ids);
 
-        empExprMapper .deleteByEmpIds(ids);
+        empExprMapper.deleteByEmpIds(ids);
+    }
+
+    @Override
+    public Emp getById(Integer id) {
+        return empMapper.getById(id);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void update(Emp emp) {
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.updateById(emp);
+        empExprMapper.deleteByEmpIds(Arrays.asList(emp.getId()));
+        List<EmpExpr> exprList= emp.getExprList();
+         if(!CollectionUtils.isEmpty (exprList)){
+            exprList.forEach(empExpr -> empExpr.setEmpId(emp.getId()));
+            empExprMapper.insertBatch(exprList);
+        }
     }
 }

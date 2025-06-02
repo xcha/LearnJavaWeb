@@ -9,10 +9,10 @@ import java.time.LocalDate;
 public class EmpQueryParam {
     private Integer page=1;
     private Integer pageSize=10;
-     private String name;
-     private Integer gender;
-     @DateTimeFormat (pattern = "yyyy-mm-dd")// 格式化日期
-     private LocalDate begin;
-     @DateTimeFormat (pattern = "yyyy-mm-dd")
-     private LocalDate end;
+    private String name;
+    private Integer gender;
+    @DateTimeFormat (pattern = "yyyy-mm-dd")// 格式化日期
+    private LocalDate begin;
+    @DateTimeFormat (pattern = "yyyy-mm-dd")
+    private LocalDate end;
 }
