@@ -2,6 +2,7 @@ package com.lianci.service;
 
 import com.lianci.pojo.Emp;
 import com.lianci.pojo.EmpQueryParam;
+import com.lianci.pojo.LoginInfo;
 import com.lianci.pojo.PageResult;
 
 import java.time.LocalDate;
@@ -20,4 +21,6 @@ public interface EmpService {
     void update(Emp emp);
 
     List<Emp> list();
+
+    LoginInfo login(Emp emp);
 }

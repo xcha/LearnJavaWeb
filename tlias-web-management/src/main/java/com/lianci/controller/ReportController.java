@@ -1,5 +1,6 @@
 package com.lianci.controller;
 
+import com.lianci.pojo.ClazzCountOption;
 import com.lianci.pojo.JobOption;
 import com.lianci.pojo.Result;
 import com.lianci.service.ReportService;
@@ -32,5 +33,19 @@ public class ReportController {
         log.info("员工性别统计");
         List<Map<String, Object>> genderList = reportService.getEmpGenderData();
         return Result.success(genderList);
+    }
+
+    @GetMapping("/studentDegreeData")
+    public Result getStudentDegreeData() {
+        log.info("学生学历统计");
+        List<Map> degreeList = reportService.getStudentDegreeData();
+        return Result.success(degreeList);
+    }
+
+    @GetMapping("/studentCountData")
+    public Result getStudentCountData(){
+        log.info("班级人数统计");
+        ClazzCountOption clazzCountOption = reportService.getStudentCountData();
+        return Result.success(clazzCountOption);
     }
 }

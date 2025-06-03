@@ -54,9 +54,9 @@ public class ClazzController {
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
-        log.info("删除id为{}的班级", id);
-        clazzService.delete(id);
+    public Result delete(@PathVariable Integer id){
+        log.info("删除班级id为{}",id);
+        clazzService.deleteById(id);
         return Result.success();
     }
 

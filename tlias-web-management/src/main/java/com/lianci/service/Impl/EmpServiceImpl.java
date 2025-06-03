@@ -6,6 +6,7 @@ import com.lianci.mapper.EmpExprMapper;
 import com.lianci.mapper.EmpMapper;
 import com.lianci.pojo.*;
 import com.lianci.service.EmpService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
+@Slf4j
 public class EmpServiceImpl implements EmpService {
     @Autowired
     private EmpMapper empMapper;
@@ -100,5 +102,16 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public List<Emp> list() {
         return empMapper.findAll();
+    }
+
+    @Override
+    public LoginInfo login(Emp emp) {
+        Emp e = empMapper.selectByUsernameAndPassword(emp);
+        if(e!=null){
+            log.info("登录成功，员工信息{}",e);
+            return new LoginInfo(e.getId(),e.getName(),e.getUsername(),"");
+        }
+
+        return null;
     }
 }

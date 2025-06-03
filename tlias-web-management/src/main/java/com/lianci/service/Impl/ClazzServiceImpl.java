@@ -2,7 +2,9 @@ package com.lianci.service.Impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.lianci.exception.BusinessException;
 import com.lianci.mapper.ClazzMapper;
+import com.lianci.mapper.StudentMapper;
 import com.lianci.pojo.Clazz;
 import com.lianci.pojo.ClazzQueryParam;
 import com.lianci.pojo.PageResult;
@@ -17,6 +19,9 @@ import java.util.List;
 public class ClazzServiceImpl implements ClazzService {
     @Autowired
     private ClazzMapper clazzMapper;
+
+    @Autowired
+    private StudentMapper studentMapper;
 
 //    @Override
 //    public PageResult <Clazz> list(ClazzQueryParam clazzQueryParam){
@@ -40,6 +45,7 @@ public class ClazzServiceImpl implements ClazzService {
 
 @Override
 public PageResult page(ClazzQueryParam clazzQueryParamnteger) {
+
     PageHelper.startPage(clazzQueryParamnteger.getPage(),clazzQueryParamnteger.getPageSize());
 
     List<Clazz> dataList = clazzMapper.list(clazzQueryParamnteger);
@@ -73,9 +79,14 @@ public PageResult page(ClazzQueryParam clazzQueryParamnteger) {
     }
 
     @Override
-    public void delete(Integer id) {
-        clazzMapper.delete(id);
+    public void deleteById(Integer id) {
+        //1. 查询班级下是否有学员
+        Integer count = studentMapper.countByClazzId(id);
+        if(count > 0){
+            throw new BusinessException("班级下有学员, 不能直接删除~");
+        }
+        //2. 如果没有, 再删除班级信息
+        clazzMapper.deleteById(id);
     }
-
 
 }

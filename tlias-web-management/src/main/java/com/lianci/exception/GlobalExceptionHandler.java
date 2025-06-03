@@ -3,13 +3,12 @@ package com.lianci.exception;
 import com.lianci.pojo.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.DuplicateFormatFlagsException;
 
 @Slf4j
-@ControllerAdvice// 全局异常处理
+@RestControllerAdvice// 全局异常处理
 public class GlobalExceptionHandler {
 
     @ExceptionHandler
@@ -26,5 +25,11 @@ public class GlobalExceptionHandler {
         String errMsg= message.substring(i);
         String[] arr= errMsg.split(" ");
         return Result.error(arr[2]+"已存在");
+    }
+
+    @ExceptionHandler
+    public Result handleBuinessException(BusinessException businessException) {
+        log.error("服务器异常", businessException);
+        return Result.error(businessException.getMessage());
     }
 }

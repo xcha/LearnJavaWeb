@@ -120,5 +120,8 @@
             count(*) value
         from emp group by gender
     </select>
+    <select id="selectByUsernameAndPassword" resultType="com.lianci.pojo.Emp">
+        select * from emp where username = #{username} and password = #{password}
+    </select>
 
 </mapper>

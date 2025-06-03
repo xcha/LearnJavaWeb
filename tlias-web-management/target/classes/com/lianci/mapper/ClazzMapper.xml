@@ -19,9 +19,6 @@
         </set>
         where id = #{id}
     </update>
-    <delete id="delete">
-        DELETE FROM clazz WHERE id = #{id}
-    </delete>
     <select id="list" resultType="com.lianci.pojo.Clazz">
         select c.*, e.name masterName, (case when begin_date > now() then '未开班' when now() > end_date then '已结课' else '在读中' end ) status from clazz c left join emp e on c.master_id = e.id
         <where>
