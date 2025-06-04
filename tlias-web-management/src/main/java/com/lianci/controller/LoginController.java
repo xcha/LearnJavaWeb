@@ -5,6 +5,7 @@ import com.lianci.pojo.LoginInfo;
 import com.lianci.pojo.Result;
 import com.lianci.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
 
-    private final EmpService empService;
-
-    public LoginController(EmpService empService) {
-        this.empService = empService;
-    }
+//    private final EmpService empService;
+//
+//    public LoginController(EmpService empService) {
+//        this.empService = empService;
+//    }
+    @Autowired
+    private EmpService empService;
 
     @PostMapping
     public Result login(@RequestBody Emp emp) {

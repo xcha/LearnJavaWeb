@@ -6,6 +6,7 @@ import com.lianci.mapper.EmpExprMapper;
 import com.lianci.mapper.EmpMapper;
 import com.lianci.pojo.*;
 import com.lianci.service.EmpService;
+import com.lianci.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,9 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -108,8 +111,14 @@ public class EmpServiceImpl implements EmpService {
     public LoginInfo login(Emp emp) {
         Emp e = empMapper.selectByUsernameAndPassword(emp);
         if(e!=null){
-            log.info("登录成功，员工信息{}",e);
-            return new LoginInfo(e.getId(),e.getName(),e.getUsername(),"");
+            log.info("登录成功, 员工信息: {}", e);
+            //生成JWT令牌
+            Map<String, Object> claims = new HashMap <>();
+            claims.put("id", e.getId());
+            claims.put("username", e.getUsername());
+            String jwt = JwtUtils.generateToken(claims);
+
+            return new LoginInfo(e.getId(), e.getUsername(), e.getName(), jwt);
         }
 
         return null;
